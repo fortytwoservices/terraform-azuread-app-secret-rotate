@@ -15,27 +15,6 @@ resource "time_rotating" "schedule2" {
   }
 }
 
-# resource "time_offset" "schedule1" {
-#   rfc3339 = time_rotating.schedule1.base_rfc3339
-
-#   offset_days = var.rotation_days
-
-#   # triggers = {
-#   #   rotation_id = time_rotating.schedule1.id
-#   # }
-# }
-
-# resource "time_offset" "schedule2" {
-#   for_each = var.rotation_type == "overlap" ? toset(["schedule"]) : toset([])
-#   rfc3339  = time_rotating.schedule1.base_rfc3339
-
-#   offset_days = var.rotation_days
-
-#   # triggers = {
-#   #   rotation_id = time_rotating.schedule2["schedule"].id
-#   # }
-# }
-
 # Create key
 resource "azuread_application_password" "key1" {
   for_each       = var.type == "password" ? toset(["password"]) : toset([])
