@@ -15,27 +15,6 @@ resource "time_rotating" "schedule2" {
   }
 }
 
-# resource "time_offset" "schedule1" {
-#   rfc3339 = time_rotating.schedule1.base_rfc3339
-
-#   offset_days = var.rotation_days
-
-#   # triggers = {
-#   #   rotation_id = time_rotating.schedule1.id
-#   # }
-# }
-
-# resource "time_offset" "schedule2" {
-#   for_each = var.rotation_type == "overlap" ? toset(["schedule"]) : toset([])
-#   rfc3339  = time_rotating.schedule1.base_rfc3339
-
-#   offset_days = var.rotation_days
-
-#   # triggers = {
-#   #   rotation_id = time_rotating.schedule2["schedule"].id
-#   # }
-# }
-
 # Create key
 resource "azuread_application_password" "key1" {
   for_each       = var.type == "password" ? toset(["password"]) : toset([])
@@ -68,8 +47,8 @@ module "azurekeyvault" {
   tenant_id     = data.azuread_client_config.current.tenant_id
   client_secret = var.type == "password" && var.rotation_type == "overlap" ? time_rotating.schedule1.unix > time_rotating.schedule2["schedule"].unix ? azuread_application_password.key1["password"].value : azuread_application_password.key2["password"].value : var.type == "password" ? azuread_application_password.key1["password"].value : null
 
-  clientid_secret_name     = var.clientid_secret_name != null ? "${var.clientid_secret_name}" : "${var.secret_name_prefix}-clientid"
-  clientsecret_secret_name = var.clientsecret_secret_name != null ? "${var.clientsecret_secret_name}" : "${var.secret_name_prefix}-clientsecret"
-  tenantid_secret_name     = var.tenantid_secret_name != null ? "${var.tenantid_secret_name}" : "${var.secret_name_prefix}-tenantid"
+  clientid_secret_name     = var.clientid_secret_name != null ? var.clientid_secret_name : "${var.secret_name_prefix}-clientid"
+  clientsecret_secret_name = var.clientsecret_secret_name != null ? var.clientsecret_secret_name : "${var.secret_name_prefix}-clientsecret"
+  tenantid_secret_name     = var.tenantid_secret_name != null ? var.tenantid_secret_name : "${var.secret_name_prefix}-tenantid"
   expiration_date          = var.key_vault_secret_expiration_date_enabled ? (var.type == "password" && var.rotation_type == "overlap" ? (time_rotating.schedule1.unix > time_rotating.schedule2["schedule"].unix ? azuread_application_password.key1["password"].end_date : azuread_application_password.key2["password"].end_date) : (var.type == "password" ? azuread_application_password.key1["password"].end_date : null)) : null
 }
