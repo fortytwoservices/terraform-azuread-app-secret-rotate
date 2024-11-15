@@ -71,30 +71,6 @@ Type: `string`
 
 The following input variables are optional (have default values):
 
-### <a name="input_certificate_common_name_fqdn"></a> [certificate\_common\_name\_fqdn](#input\_certificate\_common\_name\_fqdn)
-
-Description: The common name of the certificate
-
-Type: `string`
-
-Default: `null`
-
-### <a name="input_certificate_password_secret_name"></a> [certificate\_password\_secret\_name](#input\_certificate\_password\_secret\_name)
-
-Description: (Optional) The name of the clientcertificate secret
-
-Type: `string`
-
-Default: `null`
-
-### <a name="input_certificate_secret_name"></a> [certificate\_secret\_name](#input\_certificate\_secret\_name)
-
-Description: (Optional) The name of the clientcertificate secret
-
-Type: `string`
-
-Default: `null`
-
 ### <a name="input_clientid_secret_name"></a> [clientid\_secret\_name](#input\_clientid\_secret\_name)
 
 Description: (Optional) The name of the clientid key vault secret.
@@ -118,14 +94,6 @@ Description: (Optional) The destination of the secret to rotate. Can be of type 
 Type: `string`
 
 Default: `"keyvault"`
-
-### <a name="input_devops_project_id"></a> [devops\_project\_id](#input\_devops\_project\_id)
-
-Description: The Azure DevOps project id, output from the azuredevops\_project resource.
-
-Type: `string`
-
-Default: `null`
 
 ### <a name="input_devops_project_name"></a> [devops\_project\_name](#input\_devops\_project\_name)
 
