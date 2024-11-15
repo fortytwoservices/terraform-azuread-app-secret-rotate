@@ -6,8 +6,8 @@ resource "time_rotating" "schedule1" {
 }
 
 resource "time_rotating" "schedule2" {
-  for_each         = var.rotation_type == "overlap" ? toset(["schedule"]) : toset([])
-  rfc3339          = timecmp(timestamp(), timeadd(time_static.init.rfc3339, "5m")) == 1 ? time_rotating.schedule1.rotation_rfc3339 : null
+  for_each      = var.rotation_type == "overlap" ? toset(["schedule"]) : toset([])
+  rfc3339       = timecmp(timestamp(), timeadd(time_static.init.rfc3339, "5m")) == 1 ? time_rotating.schedule1.rotation_rfc3339 : null
   rotation_days = var.rotation_days
 
   lifecycle {

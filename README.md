@@ -48,6 +48,7 @@ The following resources are used by this module:
 
 - [azuread_application_password.key1](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/application_password) (resource)
 - [azuread_application_password.key2](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/application_password) (resource)
+- [time_offset.expiration](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/offset) (resource)
 - [time_rotating.schedule1](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/rotating) (resource)
 - [time_rotating.schedule2](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/rotating) (resource)
 - [time_static.init](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/static) (resource)
@@ -158,13 +159,21 @@ Type: `bool`
 
 Default: `true`
 
+### <a name="input_override_key_vault_secret_expiration_date"></a> [override\_key\_vault\_secret\_expiration\_date](#input\_override\_key\_vault\_secret\_expiration\_date)
+
+Description: (Optinal) Override the expiration date for the key vault secret with the following expire time in days. Default the expiration date is set to the same as rotation time, if expiration date is enabled.
+
+Type: `string`
+
+Default: `null`
+
 ### <a name="input_rotation_days"></a> [rotation\_days](#input\_rotation\_days)
 
 Description: (Optional) The number of days to wait before rotating the secret. Defaults to 180.
 
 Type: `number`
 
-Default: `10`
+Default: `180`
 
 ### <a name="input_rotation_type"></a> [rotation\_type](#input\_rotation\_type)
 

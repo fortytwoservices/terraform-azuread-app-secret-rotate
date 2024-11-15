@@ -77,11 +77,11 @@ variable "devops_project_name" {
   default     = null
 }
 
-variable "devops_project_id" {
-  type        = string
-  description = "The Azure DevOps project id, output from the azuredevops_project resource."
-  default     = null
-}
+# variable "devops_project_id" {
+#   type        = string
+#   description = "The Azure DevOps project id, output from the azuredevops_project resource."
+#   default     = null
+# }
 
 variable "devops_variable_group_name" {
   type        = string
@@ -90,22 +90,22 @@ variable "devops_variable_group_name" {
 }
 
 # For type certificate spesific variables
-variable "certificate_secret_name" {
-  type        = string
-  description = "(Optional) The name of the clientcertificate secret"
-  default     = null
-}
+# variable "certificate_secret_name" {
+#   type        = string
+#   description = "(Optional) The name of the clientcertificate secret"
+#   default     = null
+# }
 
-variable "certificate_password_secret_name" {
-  type        = string
-  description = "(Optional) The name of the clientcertificate secret"
-  default     = null
-}
+# variable "certificate_password_secret_name" {
+#   type        = string
+#   description = "(Optional) The name of the clientcertificate secret"
+#   default     = null
+# }
 
-variable "certificate_common_name_fqdn" {
-  type        = string
-  description = "The common name of the certificate"
-  default     = null
-}
+# variable "certificate_common_name_fqdn" {
+#   type        = string
+#   description = "The common name of the certificate"
+#   default     = null
+# }
 
 # For type password spesific variables
