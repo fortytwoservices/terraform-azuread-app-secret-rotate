@@ -24,7 +24,7 @@ variable "client_id" {
 variable "rotation_days" {
   type        = number
   description = "(Optional) The number of days to wait before rotating the secret. Defaults to 180."
-  default     = 10
+  default     = 180
 }
 
 variable "secret_name_prefix" {
@@ -64,6 +64,12 @@ variable "key_vault_secret_expiration_date_enabled" {
   default     = true
 }
 
+variable "override_key_vault_secret_expiration_date" {
+  type        = string
+  description = "(Optinal) Override the expiration date for the key vault secret with the following expire time in days. Default the expiration date is set to the same as rotation time, if expiration date is enabled."
+  default     = null
+}
+
 # Azure DevOps Variable Group specific variables
 variable "devops_project_name" {
   type        = string
@@ -71,11 +77,11 @@ variable "devops_project_name" {
   default     = null
 }
 
-variable "devops_project_id" {
-  type        = string
-  description = "The Azure DevOps project id, output from the azuredevops_project resource."
-  default     = null
-}
+# variable "devops_project_id" {
+#   type        = string
+#   description = "The Azure DevOps project id, output from the azuredevops_project resource."
+#   default     = null
+# }
 
 variable "devops_variable_group_name" {
   type        = string
@@ -84,22 +90,22 @@ variable "devops_variable_group_name" {
 }
 
 # For type certificate spesific variables
-variable "certificate_secret_name" {
-  type        = string
-  description = "(Optional) The name of the clientcertificate secret"
-  default     = null
-}
+# variable "certificate_secret_name" {
+#   type        = string
+#   description = "(Optional) The name of the clientcertificate secret"
+#   default     = null
+# }
 
-variable "certificate_password_secret_name" {
-  type        = string
-  description = "(Optional) The name of the clientcertificate secret"
-  default     = null
-}
+# variable "certificate_password_secret_name" {
+#   type        = string
+#   description = "(Optional) The name of the clientcertificate secret"
+#   default     = null
+# }
 
-variable "certificate_common_name_fqdn" {
-  type        = string
-  description = "The common name of the certificate"
-  default     = null
-}
+# variable "certificate_common_name_fqdn" {
+#   type        = string
+#   description = "The common name of the certificate"
+#   default     = null
+# }
 
 # For type password spesific variables

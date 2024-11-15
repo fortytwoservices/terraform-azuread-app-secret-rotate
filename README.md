@@ -4,9 +4,11 @@
 This module impelements a common way to rotate secrets for app registration and store them.
 
 Current supported secret:
+
 - Client secret
 
 Current supported storage:
+
 - Azure Key Vault
 
 <!-- markdownlint-disable MD033 -->
@@ -48,6 +50,7 @@ The following resources are used by this module:
 
 - [azuread_application_password.key1](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/application_password) (resource)
 - [azuread_application_password.key2](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/resources/application_password) (resource)
+- [time_offset.expiration](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/offset) (resource)
 - [time_rotating.schedule1](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/rotating) (resource)
 - [time_rotating.schedule2](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/rotating) (resource)
 - [time_static.init](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/static) (resource)
@@ -69,30 +72,6 @@ Type: `string`
 ## Optional Inputs
 
 The following input variables are optional (have default values):
-
-### <a name="input_certificate_common_name_fqdn"></a> [certificate\_common\_name\_fqdn](#input\_certificate\_common\_name\_fqdn)
-
-Description: The common name of the certificate
-
-Type: `string`
-
-Default: `null`
-
-### <a name="input_certificate_password_secret_name"></a> [certificate\_password\_secret\_name](#input\_certificate\_password\_secret\_name)
-
-Description: (Optional) The name of the clientcertificate secret
-
-Type: `string`
-
-Default: `null`
-
-### <a name="input_certificate_secret_name"></a> [certificate\_secret\_name](#input\_certificate\_secret\_name)
-
-Description: (Optional) The name of the clientcertificate secret
-
-Type: `string`
-
-Default: `null`
 
 ### <a name="input_clientid_secret_name"></a> [clientid\_secret\_name](#input\_clientid\_secret\_name)
 
@@ -117,14 +96,6 @@ Description: (Optional) The destination of the secret to rotate. Can be of type 
 Type: `string`
 
 Default: `"keyvault"`
-
-### <a name="input_devops_project_id"></a> [devops\_project\_id](#input\_devops\_project\_id)
-
-Description: The Azure DevOps project id, output from the azuredevops\_project resource.
-
-Type: `string`
-
-Default: `null`
 
 ### <a name="input_devops_project_name"></a> [devops\_project\_name](#input\_devops\_project\_name)
 
@@ -158,13 +129,21 @@ Type: `bool`
 
 Default: `true`
 
+### <a name="input_override_key_vault_secret_expiration_date"></a> [override\_key\_vault\_secret\_expiration\_date](#input\_override\_key\_vault\_secret\_expiration\_date)
+
+Description: (Optinal) Override the expiration date for the key vault secret with the following expire time in days. Default the expiration date is set to the same as rotation time, if expiration date is enabled.
+
+Type: `string`
+
+Default: `null`
+
 ### <a name="input_rotation_days"></a> [rotation\_days](#input\_rotation\_days)
 
 Description: (Optional) The number of days to wait before rotating the secret. Defaults to 180.
 
 Type: `number`
 
-Default: `10`
+Default: `180`
 
 ### <a name="input_rotation_type"></a> [rotation\_type](#input\_rotation\_type)
 
