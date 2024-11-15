@@ -24,7 +24,7 @@ variable "client_id" {
 variable "rotation_days" {
   type        = number
   description = "(Optional) The number of days to wait before rotating the secret. Defaults to 180."
-  default     = 10
+  default     = 180
 }
 
 variable "secret_name_prefix" {
@@ -62,6 +62,12 @@ variable "key_vault_secret_expiration_date_enabled" {
   type        = bool
   description = "Enable expiration date for the key vault secret"
   default     = true
+}
+
+variable "override_key_vault_secret_expiration_date" {
+  type        = string
+  description = "(Optinal) Override the expiration date for the key vault secret with the following expire time in days. Default the expiration date is set to the same as rotation time, if expiration date is enabled."
+  default     = null
 }
 
 # Azure DevOps Variable Group specific variables
