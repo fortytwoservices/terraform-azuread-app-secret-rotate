@@ -31,3 +31,10 @@ override.tf.json
 terraform.rc
 .DS_Store
 .idea
+*.md.tmp
+*.tfvars
+*.tfvars.json
+*tfplan*
+.terraform.lock.hcl
+README-generated.md
+crash.*.log
