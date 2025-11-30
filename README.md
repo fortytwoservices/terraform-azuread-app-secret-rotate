@@ -16,7 +16,7 @@ Current supported storage:
 
 The following requirements are needed by this module:
 
-- <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (>= 1.0.0)
+- <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (>=1.0.0)
 
 - <a name="requirement_azuread"></a> [azuread](#requirement\_azuread) (>=3.0.0)
 
