@@ -3,6 +3,7 @@ resource "azurerm_key_vault_secret" "clientid" {
   value           = var.client_id
   key_vault_id    = var.key_vault_id
   expiration_date = var.expiration_date
+  content_type    = "uuid"
 }
 
 resource "azurerm_key_vault_secret" "clientsecret" {
@@ -10,6 +11,7 @@ resource "azurerm_key_vault_secret" "clientsecret" {
   value           = var.client_secret
   key_vault_id    = var.key_vault_id
   expiration_date = var.expiration_date
+  content_type    = "password"
 }
 
 resource "azurerm_key_vault_secret" "tenantid" {
@@ -17,4 +19,5 @@ resource "azurerm_key_vault_secret" "tenantid" {
   value           = var.tenant_id
   key_vault_id    = var.key_vault_id
   expiration_date = var.expiration_date
+  content_type    = "uuid"
 }
