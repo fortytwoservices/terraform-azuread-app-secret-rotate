@@ -1,8 +1,9 @@
 mock_provider "azuread" {}
-mock_provider "azurerm" {
-}
+mock_provider "azurerm" {}
+mock_provider "random" {}  
+mock_provider "time" {} 
 
-run "advanced_example" {
+run "test_advanced_example_with_overlap_rotation" {
   command = apply
   module {
     source = "./examples/advanced"
@@ -67,6 +68,6 @@ run "advanced_example" {
 
   assert {
     condition     = module.advanced_rotation.key == "key1"
-    error_message = "Client ID secret should be correct"
+    error_message = "Active rotation key should be key1"
   }
 }

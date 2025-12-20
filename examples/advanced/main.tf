@@ -55,6 +55,10 @@ resource "azurerm_key_vault" "example" {
   }
 
   sku_name = "standard"
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "azuread_application" "example" {

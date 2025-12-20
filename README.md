@@ -77,16 +77,26 @@ resource "random_string" "kv_name" {
   upper   = false
 }
 
+#
 resource "azurerm_key_vault" "example" {
-  name                        = random_string.kv_name.result
-  location                    = azurerm_resource_group.example.location
-  resource_group_name         = azurerm_resource_group.example.name
-  enabled_for_disk_encryption = true
-  tenant_id                   = data.azurerm_client_config.current.tenant_id
-  soft_delete_retention_days  = 7
-  purge_protection_enabled    = false
+  name                       = random_string.kv_name.result
+  location                   = azurerm_resource_group.example.location
+  resource_group_name        = azurerm_resource_group.example.name
+  tenant_id                  = data.azurerm_client_config.current.tenant_id
+  soft_delete_retention_days = 7
+  purge_protection_enabled   = true
+  rbac_authorization_enabled = true
+
+  network_acls {
+    default_action = "Deny"
+    bypass         = "None"
+  }
 
   sku_name = "standard"
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "azuread_application" "example" {
@@ -275,6 +285,7 @@ Source: ./modules/azurekeyvault
 Version:
 
 ## About
+
 Fortytwo.io is a Nordic cloud and identity security specialist focused on Microsoft Entra ID, Azure, and modern Zero Trust architectures. We help organizations enhance their security posture, streamline identity management, and implement robust cloud solutions tailored to their unique needs.
 
 <script type="application/ld+json">
