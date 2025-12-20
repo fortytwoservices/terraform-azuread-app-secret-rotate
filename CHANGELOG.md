@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0](https://github.com/fortytwoservices/terraform-azuread-app-secret-rotate/compare/v0.2.0...v0.3.0) (2025-12-20)
+
+
+### Features
+
+* add example and tests ([#85](https://github.com/fortytwoservices/terraform-azuread-app-secret-rotate/issues/85)) ([5535cf6](https://github.com/fortytwoservices/terraform-azuread-app-secret-rotate/commit/5535cf6b775793d78167c9429661673c0141db7e))
+* set content_type on kv secrets ([#75](https://github.com/fortytwoservices/terraform-azuread-app-secret-rotate/issues/75)) ([194d18d](https://github.com/fortytwoservices/terraform-azuread-app-secret-rotate/commit/194d18debf00e93994b4233488fa43fde51212c0))
+
 ## [0.2.0](https://github.com/fortytwoservices/terraform-azuread-app-secret-rotate/compare/v0.1.0...v0.2.0) (2024-11-15)
 
 
