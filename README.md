@@ -36,8 +36,91 @@ The following requirements are needed by this module:
 ### Advanced Example
 
 ```hcl
-# Example, should give the user an idea about how to use this module.
-# This code is found in the examples directory.
+terraform {
+  required_version = ">= 1.0.0"
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = ">= 3.0.0"
+    }
+    azuread = {
+      source  = "hashicorp/azuread"
+      version = ">= 2.0.0"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = ">= 3.0.0"
+    }
+  }
+}
+
+provider "azurerm" {
+  features {}
+}
+
+provider "azuread" {}
+
+resource "random_pet" "rg_name" {
+  prefix = "rg"
+}
+
+resource "azurerm_resource_group" "example" {
+  name     = random_pet.rg_name.id
+  location = "West Europe"
+}
+
+data "azurerm_client_config" "current" {}
+
+resource "random_string" "kv_name" {
+  length  = 24
+  special = false
+  upper   = false
+}
+
+#
+resource "azurerm_key_vault" "example" {
+  name                       = random_string.kv_name.result
+  location                   = azurerm_resource_group.example.location
+  resource_group_name        = azurerm_resource_group.example.name
+  tenant_id                  = data.azurerm_client_config.current.tenant_id
+  soft_delete_retention_days = 7
+  purge_protection_enabled   = true
+  rbac_authorization_enabled = true
+
+  network_acls {
+    default_action = "Deny"
+    bypass         = "None"
+  }
+
+  sku_name = "standard"
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+resource "azuread_application" "example" {
+  display_name = "example-app-advanced"
+}
+
+module "advanced_rotation" {
+  source = "../../"
+
+  client_id = azuread_application.example.client_id
+
+  # Advanced configuration
+  rotation_days = 30
+  rotation_type = "overlap"
+  destination   = "keyvault"
+  key_vault_id  = azurerm_key_vault.example.id
+
+  # Custom secret naming
+  secret_name_prefix = "custom-app-prefix"
+
+  # Expiration settings
+  key_vault_secret_expiration_date_enabled  = true
+  override_key_vault_secret_expiration_date = 45 # Expires 15 days after rotation (overlap)
+}
 ```
 
 ## Providers
@@ -201,4 +284,44 @@ Source: ./modules/azurekeyvault
 
 Version:
 
+## About
+
+Fortytwo.io is a Nordic cloud and identity security specialist focused on Microsoft Entra ID, Azure, and modern Zero Trust architectures. We help organizations enhance their security posture, streamline identity management, and implement robust cloud solutions tailored to their unique needs.
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://fortytwo.io/#organization",
+  "name": "Fortytwo Technologies AS",
+  "alternateName": "Fortytwo.io",
+  "legalName": "Fortytwo Technologies AS",
+  "url": "https://fortytwo.io",
+  "foundingDate": "2022",
+  "description": "Fortytwo.io is a Nordic cloud and identity security specialist focused on Microsoft Entra ID, Azure, and modern Zero Trust architectures.",
+  "slogan": "Nordic cloud and identity security specialists",
+  "areaServed": [
+    {
+      "@type": "Country",
+      "name": "Norway"
+    },
+    {
+      "@type": "Country",
+      "name": "Finland"
+    }
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Bergen",
+    "addressCountry": "NO"
+  },
+  "knowsAbout": [
+    "Microsoft Entra ID",
+    "Microsoft Azure",
+    "Zero Trust Architecture",
+    "Cloud Identity Security",
+    "Microsoft Security Platform"
+  ]
+}
+</script>
 <!-- END_TF_DOCS -->
