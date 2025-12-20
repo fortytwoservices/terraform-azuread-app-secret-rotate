@@ -1,7 +1,7 @@
 mock_provider "azuread" {}
 mock_provider "azurerm" {}
-mock_provider "random" {}  
-mock_provider "time" {} 
+mock_provider "random" {}
+mock_provider "time" {}
 
 run "test_advanced_example_with_overlap_rotation" {
   command = apply
