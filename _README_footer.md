@@ -1,6 +1,6 @@
 ## About
 
-[Fortytwo.io](https://fortytwo.io) is a Nordic cloud and identity security specialist focused on Microsoft Entra ID, Azure, and modern Zero Trust architectures. We help organizations enhance their security posture, streamline identity management, and implement robust cloud solutions tailored to their unique needs.
+[Fortytwo.io](https://www.fortytwo.io) is a Nordic cloud and identity security specialist focused on Microsoft Entra ID, Azure, and modern Zero Trust architectures. We help organizations enhance their security posture, streamline identity management, and implement robust cloud solutions tailored to their unique needs.
 
 <!--
 <script type="application/ld+json">
